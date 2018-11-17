@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Aux from '../../hoc/_Aux'
 import classes from './Cockpit.css';
 
 const cockpit = ( props ) => {
@@ -17,13 +17,14 @@ const cockpit = ( props ) => {
     }
 
     return (
-        <div className={classes.Cockpit}>
+        //we could've used fragment <> if we used react 16.2
+        <Aux>
             <h1>{ props.appTitle }</h1>
             <p className={assignedClasses.join( ' ' )}>This is really working!</p>
             <button
                 className={btnClass}
                 onClick={props.clicked}>Toggle Persons</button>
-        </div>
+        </Aux>
     );
 };
 
