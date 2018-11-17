@@ -1,10 +1,26 @@
-import React, { Component } from 'react';
-
+import React, { PureComponent } from 'react';
+//Pure component is the the same as component but it has a type of shouldComponentUpdate already built in (go through all the properties in the state/props and compare them to their old version)
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
+  constructor(props){
+    //we have to call super if we use constructor, if we don't use constructor, react automatically reach out to super constructor
+    super(props);
+    console.log('App.js constructor',props);
+
+   // we can initialize the state here if we want but it will be this.state={}
+  }
+
+  componentWillMount(){
+    console.log('App.js inside willMount',this.props);
+  }
+
+
+  componentDidMount() {
+    console.log('App.js inside didMount', this.props);
+  }
   state = {
     persons: [
       { id: 'asfa1', name: 'Max', age: 28 },
@@ -47,6 +63,7 @@ class App extends Component {
   }
 
   render () {
+    console.log('App.js inside render()', this.props);
     let persons = null;
 
     if ( this.state.showPersons ) {
@@ -58,6 +75,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+      <button onClick = {()=> { this.setState({showPersons: true})}}> Show Persons </button>
         <Cockpit
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
